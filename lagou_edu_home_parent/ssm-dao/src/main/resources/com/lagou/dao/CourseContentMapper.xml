@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lagou.dao.CourseContentMapper">
+
+    <resultMap id="SectionAndLessonResultMap" type="com.lagou.domain.CourseSection">
+        <id property="id" column="id"></id>
+        <result property="courseId" column="course_id"></result>
+        <result property="sectionName" column="section_name"></result>
+        <result property="description" column="description"></result>
+        <result property="orderNum" column="order_num"></result>
+        <result property="createTime" column="create_time"></result>
+        <result property="updateTime" column="update_time"></result>
+        <result property="isDe" column="is_de"></result>
+
+        <collection property="lessonList" ofType="com.lagou.domain.CourseLesson">
+            <id property="id" column="lessonId"></id>
+            <result property="courseId" column="course_id"></result>
+            <result property="sectionId" column="section_id"></result>
+            <result property="theme" column="theme"></result>
+            <result property="duration" column="duration"></result>
+            <result property="isFree" column="is_free"></result>
+            <result property="orderNum" column="order_num"></result>
+            <result property="status" column="status"></result>
+        </collection>
+    </resultMap>
+
+    <select id="findSectionAndLessonByCourseId" parameterType="int" resultMap="SectionAndLessonResultMap">
+        SELECT
+            cs.*,
+            cl.id lessonid,
+            cl.course_id,
+            cl.section_id,
+            cl.theme,
+            cl.duration,
+            cl.create_time,
+            cl.update_time,
+            cl.is_del,
+            cl.order_num,
+            cl.status
+        FROM course_section cs
+          LEFT JOIN course_lesson cl
+          ON cl.section_id = cs.id
+        WHERE cs.course_id = #{id}
+        ORDER BY cs.order_num
+    </select>
+
+    <!-- 回显课程信息 -->
+    <select id="findCourseByCourseId" parameterType="int" resultType="com.lagou.domain.Course">
+        SELECT id,course_name FROM course WHERE id = #{courseId}
+    </select>
+
+    <!-- 保存章节 -->
+    <insert id="saveSection" parameterType="com.lagou.domain.CourseSection">
+        INSERT INTO course_section(
+            course_id,
+            section_name,
+            description,
+            order_num,
+            STATUS,
+            create_time,
+            update_time
+            )VALUES(#{courseId},#{sectionName},#{description},#{orderNum},
+            #{status},#{createTime},#{updateTime});
+    </insert>
+
+    <!-- 修改章节 -->
+    <update id="updateSection" parameterType="com.lagou.domain.CourseSection">
+        UPDATE course_section
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sectionName != null and sectionName != ''">
+                section_name = #{sectionName},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="orderNum != null and orderNum != '' or orderNum == 0">
+                order_num = #{orderNum},
+            </if>
+            <if test="updateTime != null">
+                update_time=#{updateTime}
+            </if>
+        </trim>
+
+        <where>
+            <if test="id != null and id != '' ">id = #{id}</if>
+        </where>
+    </update>
+
+    <!-- 修改章节状态 -->
+    <update id="updateSectionStatus" parameterType="com.lagou.domain.CourseSection">
+            UPDATE course_section
+                set status = #{status},
+                    update_time = #{updateTime}
+                WHERE id = #{id}
+    </update>
+</mapper>
