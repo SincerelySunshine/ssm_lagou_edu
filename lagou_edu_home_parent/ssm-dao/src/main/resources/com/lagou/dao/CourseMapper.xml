@@ -11,7 +11,7 @@
             <if test="courseName != null and courseName != ''">
                 and course_name like concat('%',#{courseName},'%')
             </if>
-            <if test="status != null and courseName != ''">
+            <if test="status != null">
                 and status = #{status}
             </if>
             <if test="true">

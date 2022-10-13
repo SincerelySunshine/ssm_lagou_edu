@@ -267,34 +267,4 @@ public class CourseVO {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    @Override
-    public String toString() {
-        return "CourseVO{" +
-                "id=" + id +
-                ", courseName='" + courseName + '\'' +
-                ", brief='" + brief + '\'' +
-                ", price=" + price +
-                ", priceTag='" + priceTag + '\'' +
-                ", discounts=" + discounts +
-                ", discountsTag='" + discountsTag + '\'' +
-                ", courseDescriptionMarkDown='" + courseDescriptionMarkDown + '\'' +
-                ", courseDescription='" + courseDescription + '\'' +
-                ", courseImgUrl='" + courseImgUrl + '\'' +
-                ", isNew=" + isNew +
-                ", isNewDes='" + isNewDes + '\'' +
-                ", lastOperatorId=" + lastOperatorId +
-                ", isDel=" + isDel +
-                ", totalDuration=" + totalDuration +
-                ", courseListImg='" + courseListImg + '\'' +
-                ", status=" + status +
-                ", sortNum=" + sortNum +
-                ", previewFirstField='" + previewFirstField + '\'' +
-                ", previewSecondField='" + previewSecondField + '\'' +
-                ", sales=" + sales +
-                ", teacherName='" + teacherName + '\'' +
-                ", position='" + position + '\'' +
-                ", description='" + description + '\'' +
-                '}';
-    }
 }
