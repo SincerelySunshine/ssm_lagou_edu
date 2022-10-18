@@ -26,9 +26,11 @@ public class CourseController {
 
     @RequestMapping("/findCourseByCondition")
     public ResponseResult findCourseByCondition(@RequestBody CourseVO courseVO){
+        System.out.println(courseVO);
         List<Course> list = courseService.findCourseByCondition(courseVO);
         ResponseResult responseResult = new ResponseResult(true, 200, "响应成功", list);
         return responseResult;
+
     }
 
     @RequestMapping("/courseUpload")
@@ -68,7 +70,7 @@ public class CourseController {
     * */
     @RequestMapping("/saveOrUpdateCourse")
     public ResponseResult saveOrUpdateCourse(@RequestBody CourseVO courseVO) throws InvocationTargetException, IllegalAccessException {
-        if (courseVO.getId() == null){
+        if (courseVO.getId() == null || courseVO.getId()==0){
             courseService.saveCourseOrTeacher(courseVO);
             ResponseResult responseResult = new ResponseResult(true, 200, "新增成功", null);
             return responseResult;

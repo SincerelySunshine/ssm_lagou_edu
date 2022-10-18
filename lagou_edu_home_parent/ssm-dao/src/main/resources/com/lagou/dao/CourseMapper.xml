@@ -4,14 +4,13 @@
 
 <mapper namespace="com.lagou.dao.CourseMapper">
     <!--多条件课程列表查询-->
-    <select id="findCourseByCondition" parameterType="com.lagou.domain.CourseVO"
-            resultType="com.lagou.domain.Course">
+    <select id="findCourseByCondition" parameterType="com.lagou.domain.CourseVO" resultType="com.lagou.domain.Course">
         select * from course
         <where>
             <if test="courseName != null and courseName != ''">
                 and course_name like concat('%',#{courseName},'%')
             </if>
-            <if test="status != null">
+            <if test="status != null and status!='' " >
                 and status = #{status}
             </if>
             <if test="true">

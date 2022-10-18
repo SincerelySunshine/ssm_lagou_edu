@@ -33,4 +33,49 @@
     <update id="updatePromotionAdStatus" parameterType="com.lagou.domain.PromotionAd">
         update promotion_ad set status = #{status},updateTime = #{updateTime} where id = #{id}
     </update>
+
+    <select id="findAllPromotionAdById" parameterType="int" resultType="com.lagou.domain.PromotionAd">
+        select * from promotion_ad where id = #{id}
+    </select>
+
+    <insert id="savePromotionAd" parameterType="com.lagou.domain.PromotionAd">
+        insert into promotion_ad values (NULL,#{name},#{spaceId},#{keyword},#{htmlContent},#{text},#{link},#{startTime},#{endTime},#{createTime},
+        #{updateTime},#{status},#{priority},#{img});
+    </insert>
+
+    <update id="updatePromotionAd" parameterType="com.lagou.domain.PromotionAd">
+        update promotion_ad
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="spaceId != null and spaceId != ''">
+                spaceId = #{spaceId},
+            </if>
+            <if test="link != null">
+                link=#{link},
+            </if>
+            <if test="status != null and status != '' or status == 0">
+                status=#{status},
+            </if>
+            <if test="img != null">
+                img=#{img},
+            </if>
+            <if test="text != null">
+                text=#{text},
+            </if>
+            <if test="startTime != null">
+                startTime=#{startTime},
+            </if>
+            <if test="endTime != null">
+                endTime=#{endTime},
+            </if>
+            <if test="updateTime != null">
+                updateTime=#{updateTime},
+            </if>
+        </trim>
+        <where>
+            <if test="id != null and id != '' ">id = #{id}</if>
+        </where>
+    </update>
 </mapper>

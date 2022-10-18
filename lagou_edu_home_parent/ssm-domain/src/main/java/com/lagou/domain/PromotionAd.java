@@ -23,9 +23,12 @@ public class PromotionAd {
     private String link;
     // 开始时间
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date startTime;
     // 结束时间
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date endTime;
+
     private Date createTime;
     private Date updateTime;
     private Integer status;

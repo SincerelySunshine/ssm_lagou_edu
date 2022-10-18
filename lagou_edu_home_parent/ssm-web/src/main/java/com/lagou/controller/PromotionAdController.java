@@ -67,4 +67,19 @@ public class PromotionAdController {
         ResponseResult responseResult = new ResponseResult(true, 200, "广告动态上下线", null);
         return responseResult;
     }
+    @RequestMapping("/saveOrUpdatePromotionAd")
+    public ResponseResult saveOrUpdatePromotionAd(@RequestBody PromotionAd promotionAd){
+
+        if (promotionAd.getId()!=null){
+            //更新操作
+            promotionAdService.updatePromotionAd(promotionAd);
+            return new ResponseResult(true,200,"修改广告信息成功",null);
+        }
+        else {
+            promotionAdService.savePromotionAd(promotionAd);
+            return new ResponseResult(true,200,"添加广告成功",null);
+        }
+
+    }
+
 }
