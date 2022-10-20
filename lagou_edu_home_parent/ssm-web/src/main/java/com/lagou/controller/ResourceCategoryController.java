@@ -22,4 +22,5 @@ public class ResourceCategoryController {
         ResponseResult responseResult = new ResponseResult(true, 200, "查询所有资源分类成功", allResourceCategory);
         return responseResult;
     }
+
 }

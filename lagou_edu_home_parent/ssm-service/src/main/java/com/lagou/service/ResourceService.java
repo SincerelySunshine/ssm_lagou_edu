@@ -11,4 +11,9 @@ public interface ResourceService {
         资源分页 及 多条件查询
      */
     public PageInfo<Resource> findAllResourceByPage(ResourceVO resourceVO);
+    public void saveResource(Resource resource);
+
+    public void updateResource(Resource resource);
+
+    public void deleteResource(Integer id);
 }

@@ -10,4 +10,9 @@ public interface ResourceMapper {
         资源分页 及 多条件查询
      */
     public List<Resource> findAllResourceByPage(ResourceVO resourceVO);
+    public void saveResource(Resource resource);
+
+    public void updateResource(Resource resource);
+
+    public void deleteResource(Integer id);
 }
