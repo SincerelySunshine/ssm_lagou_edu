@@ -10,6 +10,11 @@ import java.util.List;
 
 public interface UserService {
     public PageInfo findAllUserByPage(UserVO userVO);
+
+    /*
+   更新用户状态
+    */
+    public void updateUserStatus(Integer id ,String status);
     /*
        用户登录
     */

@@ -28,6 +28,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void updateUserStatus(Integer id, String status) {
+        userMapper.updateUserStatus(id,status);
+    }
+
+    @Override
     public User login(User user) throws Exception {
         //调用mapper方法 包含密文密码
         User user1 = userMapper.login(user);

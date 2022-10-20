@@ -31,4 +31,16 @@
     <select id="findMenuById" parameterType="int" resultType="com.lagou.domain.Menu">
         select * from menu where id = #{id}
     </select>
+
+    <insert id="saveMenu" parameterType="com.lagou.domain.Menu">
+        insert into menu  values (null ,#{parentId},#{href},#{icon},#{name},#{description},#{orderNum},#{shown},#{level},#{createdTime},#{updatedTime},#{createdBy},#{updatedBy})
+    </insert>
+
+    <update id="updateMenu" parameterType="com.lagou.domain.Menu">
+        update menu set name=#{name},parent_id=#{parentId},href=#{href},icon=#{icon},order_num=#{orderNum},level=#{level},description=#{description},updated_time=#{updatedTime},updated_by=#{updatedBy} where id=#{id}
+    </update>
+
+    <delete id="deleteMenu" parameterType="int">
+        delete from menu where id =#{id}
+    </delete>
 </mapper>

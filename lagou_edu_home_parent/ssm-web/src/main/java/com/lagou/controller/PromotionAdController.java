@@ -81,5 +81,10 @@ public class PromotionAdController {
         }
 
     }
+    @RequestMapping("/findAllPromotionAdById")
+    public ResponseResult findAllPromotionAdById(Integer id){
+        PromotionAd allPromotionAdById = promotionAdService.findAllPromotionAdById(id);
+        return new ResponseResult(true,200,"添加广告成功",allPromotionAdById);
+    }
 
 }

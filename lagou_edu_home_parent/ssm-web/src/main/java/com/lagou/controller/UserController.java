@@ -47,6 +47,18 @@ public class UserController {
             return new ResponseResult(true,400,"用户名错误",null);
         }
     }
+
+    @RequestMapping("/updateUserStatus")
+    public ResponseResult updateUserStatus(Integer id,String status){
+        if ("ENABLE".equalsIgnoreCase(status)) {
+            status = "DISABLE";
+        } else {
+            status = "ENABLE";
+        }
+        userService.updateUserStatus(id,status);
+        return new ResponseResult(true,200,"用户状态修改成功",status);
+    }
+
     /*
         分配角色(回显)
      */
